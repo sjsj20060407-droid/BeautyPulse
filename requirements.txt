@@ -1,0 +1,9 @@
+pandas>=2.2,<3.0
+numpy>=1.26,<3.0
+matplotlib>=3.8,<4.0
+seaborn>=0.13,<1.0
+plotly>=5.24,<7.0
+streamlit>=1.41,<2.0
+jieba>=0.42,<1.0
+pyarrow>=18,<25
+pytest>=8.3,<10.0
