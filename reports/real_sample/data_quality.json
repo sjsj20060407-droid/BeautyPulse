@@ -1,0 +1,15 @@
+{
+  "source_rows": 683,
+  "unique_posts": 645,
+  "duplicate_rows_removed": 38,
+  "date_min_utc": "2017-09-13T11:49:42+00:00",
+  "date_max_utc": "2026-07-09T02:30:13+00:00",
+  "brand_match_rate": 0.8016,
+  "minimum_reported_group_size": 5,
+  "sampling_note": "Convenience search sample; descriptive only, not representative of Xiaohongshu.",
+  "distribution_note": "Counts cluster below 10,000; possible export/search sampling effects were not independently verified.",
+  "missing_like_count_rate": 0.1288,
+  "missing_collect_count_rate": 0.0498,
+  "missing_comment_count_rate": 0.0205,
+  "missing_share_count_rate": 0.0029
+}
