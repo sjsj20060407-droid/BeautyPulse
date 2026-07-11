@@ -1,0 +1,10 @@
+{
+  "weeks": 53,
+  "date_min": "2025-07-06",
+  "date_max": "2026-07-05",
+  "brands": 13,
+  "group2_to_group1_factor_via_3CE": 1.1764705882352942,
+  "group3_to_group1_factor_via_Mistine": 0.0942507068803016,
+  "below_one_treatment": "flagged as censored; 0.5 used for sensitivity estimate",
+  "interpretation": "relative calibrated index; not absolute search volume"
+}
