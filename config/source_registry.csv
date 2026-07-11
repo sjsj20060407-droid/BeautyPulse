@@ -1,0 +1,6 @@
+source,signal,geography,freshness,access_method,reliability_role,status
+Xiaohongshu search sample,content and engagement,China,collection-time snapshot,local compliant export,topic interpretation,active
+Olive Young Global Best Sellers,sales rank,South Korea,daily,official page snapshot,commercial validation,active
+Google Trends,relative search interest,global and regional,up to two-day latency,official CSV export or approved API,demand validation,template_ready
+TikTok Research API,video engagement and hashtags,multiple regions,48-hour ingestion and possible metric delay,approved official API,social validation,optional_approval
+

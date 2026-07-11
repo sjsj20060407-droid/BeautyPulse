@@ -1,0 +1,21 @@
+keyword_group,keyword,category,intent
+trend,Olive Young必买,all,discovery
+trend,Olive Young彩妆,all,discovery
+trend,韩妆新品,all,discovery
+trend,泰妆测评,all,discovery
+trend,日妆开架,all,discovery
+product,气垫测评,base,evaluation
+product,粉底液持妆,base,evaluation
+product,遮瑕测评,base,evaluation
+product,粉饼控油,base,evaluation
+product,唇泥测评,lip,evaluation
+product,唇釉显白,lip,evaluation
+pain_point,粉底液氧化,base,negative
+pain_point,底妆卡粉,base,negative
+pain_point,气垫暗沉,base,negative
+pain_point,唇釉沾杯,lip,negative
+pain_point,唇泥拔干,lip,negative
+audience,黄皮彩妆,all,audience
+audience,敏感肌底妆,base,audience
+value,平价彩妆,all,value
+value,大牌平替,all,value
