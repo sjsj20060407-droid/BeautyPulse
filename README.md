@@ -10,7 +10,7 @@ interactive dashboard—not crawling scale.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
 ![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC)
-![Data](https://img.shields.io/badge/public%20data-synthetic-green)
+![Data](https://img.shields.io/badge/public%20data-synthetic%20%2B%20aggregates-green)
 ![License](https://img.shields.io/badge/code-MIT-blue)
 
 ## Questions answered
@@ -21,6 +21,15 @@ interactive dashboard—not crawling scale.
 - Which pain points—dryness, oxidation, transfer or irritation—appear in reviews?
 - Do K-beauty products discovered through Olive Young trends receive attention
   on Chinese platforms?
+
+## Multi-source design
+
+One platform is not treated as market truth. Xiaohongshu describes discussion,
+Olive Young's daily sales ranking validates Korean commercial momentum, and
+Google Trends adds regional search interest. TikTok Research API is documented
+as an optional approved source. See
+[`docs/data_source_plan.md`](docs/data_source_plan.md) and
+[`config/source_registry.csv`](config/source_registry.csv).
 
 ## Repository layout
 
@@ -50,9 +59,77 @@ pytest -q
 streamlit run dashboard/app.py
 ```
 
+Official ranking and trend exports can be validated with:
+
+```bash
+python scripts/import_market_signal.py --source google_trends \
+  --input local_trends.csv --output data/processed/google_trends.csv
+python scripts/import_market_signal.py --source oliveyoung \
+  --input local_ranking.csv --output data/processed/oliveyoung_rankings.csv
+```
+
+`data/external_aggregates/oliveyoung_global_homepage_2026-07-11.csv`
+is a small, dated trial snapshot of products visibly listed in the official
+global homepage Best Sellers module. It is not presented as the Makeup category
+or as a historical ranking. The source page is dynamic, so subsequent snapshots
+should be recorded with their observation date rather than silently replacing
+this file.
+
+The first verified category snapshot is
+`data/external_aggregates/oliveyoung_makeup_top20_2026-07-11.csv`. It contains
+ranks 1–20 from `Top in Korea > Makeup`, transcribed from dated screenshots and
+validated for complete, unique ranks. WAKEMAKE, 3CE and rom&nd appear in both
+this ranking and the Xiaohongshu pilot sample. This is cross-source coverage,
+not evidence that engagement and sales rank share the same scale or cause one
+another.
+
+## Google Trends pilot
+
+Three official UI exports cover 53 aligned weeks from 6 July 2025 to 5 July
+2026 and 13 brands. Because each Google Trends request is independently scaled,
+3CE bridges the K-beauty and Japan/Thailand batches, while MISTINE bridges the
+Japan/Thailand and C-beauty batches. `process_google_trends.py` records the
+factors and retains the original index alongside a calibrated relative index.
+
+For the latest 13 weeks, Shiseido and Laneige have the strongest relative
+signals, followed by Judydoll. HERA is zero throughout this global Google sample
+and several smaller brands frequently appear as zero or below one. These values
+indicate insufficient visible search signal, not zero consumer awareness.
+Google Trends is normalized search interest rather than absolute query volume.
+
+Generated files:
+
+- `data/external_aggregates/google_trends_weekly_calibrated.csv`
+- `data/external_aggregates/google_trends_brand_summary.csv`
+- `data/external_aggregates/google_trends_quality.json`
+- `reports/real_sample/multisource_brand_coverage_v2.csv`
+
 The generated public demo uses deterministic synthetic records. It is useful
 for testing the entire pipeline but must not be presented as real consumer
 evidence.
+
+## Real pilot sample
+
+The repository also includes privacy-safe aggregates from a Xiaohongshu search
+export collected on 9 July 2026. The input contained 683 rows and 645 unique
+posts; 38 duplicate rows were removed. The original post-level file stays
+local. No nickname, title, description, URL, note ID or access token is
+published.
+
+The sample is useful for demonstrating data quality checks and the difference
+between coverage and representativeness. It is **not** a current popularity
+ranking: publication dates span 2017–2026, results came from selected search
+queries, and 12.9% of like counts were unavailable. Missing metrics are excluded
+from their medians rather than treated as zero. Groups with fewer than five
+posts are suppressed.
+
+Reproduce the aggregate report from a local export:
+
+```bash
+python scripts/analyze_real_sample.py \
+  --input /path/to/search_contents.csv \
+  --output-dir reports/real_sample
+```
 
 ## Importing an external export
 
